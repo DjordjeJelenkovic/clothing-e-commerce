@@ -13,7 +13,7 @@ const HatsPage = () => (
 function App() {
   return (
     <div>
-      <HomePage />
+      {/* <HomePage /> */}
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/hats' component={HatsPage} />
