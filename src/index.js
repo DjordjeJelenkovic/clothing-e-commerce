@@ -11,7 +11,7 @@ import App from './App';
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <App testProp='123' randomProp='{test: 999}' />
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
