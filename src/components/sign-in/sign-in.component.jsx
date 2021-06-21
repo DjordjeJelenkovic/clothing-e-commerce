@@ -26,7 +26,7 @@ class SignIn extends React.Component {
     try {
       await auth.signInWithEmailAndPassword(email, password);
       this.setState({ email: '', password: '' });
-      this.props.history.push('/shop');
+      // this.props.history.push('/shop');
 
     } catch (error) {
       alert(error);
@@ -39,11 +39,11 @@ class SignIn extends React.Component {
     this.setState({ [name]: value });
   };
 
-  signInAndLog = async () => {
-    await signInWithGoogle()
-    console.log("test")
-    this.props.history.push('/shop');
-  }
+  //   signInAndLog = async () => {
+  //   await signInWithGoogle()
+  //   console.log("test")
+  //   this.props.history.push('/shop');
+  // }
 
   render() {
     return (
@@ -70,7 +70,7 @@ class SignIn extends React.Component {
           />
          <div className='buttons'>
             <CustomButton type='submit'> Sign in </CustomButton>
-            <CustomButton onClick={this.signInAndLog} isGoogleSignIn>
+            <CustomButton isGoogleSignIn>
               Sign in with Google
             </CustomButton>
           </div>
