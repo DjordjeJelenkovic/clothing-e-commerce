@@ -13,7 +13,7 @@ import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 import './header.styles.scss';
 
-const Header = ({ mappedCurrentUser, mappetHiddenCard }) => (
+const Header = ({ currentUser, hidden }) => (
   <div className='header'>
     <Link className='logo-container' to='/'>
       <Logo className='logo' />
@@ -25,7 +25,7 @@ const Header = ({ mappedCurrentUser, mappetHiddenCard }) => (
       <Link className='option' to='/shop'>
         CONTACT
       </Link>
-      {mappedCurrentUser ? (
+      {currentUser ? (
         <div className='option' onClick={() => auth.signOut()}>
           SIGN OUT
         </div>
@@ -36,7 +36,7 @@ const Header = ({ mappedCurrentUser, mappetHiddenCard }) => (
       )}
       <CartIcon />
     </div>
-    {mappetHiddenCard ? null : <CartDropdown />}
+    {hidden ? null : <CartDropdown />}
   </div>
 );
 const mapStateToProps = createStructuredSelector({
