@@ -11,10 +11,12 @@ import CheckoutPage from './pages/checkout/checkout.component';
 
 import Header from './components/header/header.component.jsx';
 
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument, addCollectionAndDocuments } from './firebase/firebase.utils';
 
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
+import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
+
 
 class App extends React.Component {
   // constructor() {
@@ -28,27 +30,28 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    console.error('this.props: ', this.props)
-    const { mappedSetCurrentUser } = this.props;
+    // console.error('this.props: ', this.props)
+    const { mappedSetCurrentUser, collectionsArray } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapShot => {
-          console.log('data whole: ', snapShot)
-          console.error('data whole: ', snapShot)
-          console.warn('data: ', snapShot.data())
-          console.info('data: ', snapShot.data())
+          // console.log('data whole: ', snapShot)
+          // console.error('data whole: ', snapShot)
+          // console.warn('data: ', snapShot.data())
+          // console.info('data: ', snapShot.data())
           mappedSetCurrentUser({
               id: snapShot.id,
               ...snapShot.data()
           });
           // console.log(this.state);
-
         });
       }
+
       mappedSetCurrentUser(userAuth);
+      addCollectionAndDocuments('collections', collectionsArray);
     });
   }
 
@@ -81,7 +84,8 @@ class App extends React.Component {
   }
 }
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  collectionsArray: selectCollectionsForPreview
 });
 
 const mapDispatchToProps = dispatch => ({
