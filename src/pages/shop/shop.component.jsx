@@ -31,10 +31,12 @@ class ShopPage extends React.Component {
     // const { updateCollections } = this.props;
     // const collectionRef = firestore.collection('collections');
 
-    // // fetch('https://firestore.googleapis.com/v1/projects/crwn-db-72e2a/databases/(default)/documents/collections')
-    // // .then(response => response.json())
-    // // .then(collections => console.log(collections));
-
+    fetch('https://firestore.googleapis.com/v1/projects/crwn-db-72e2a/databases/(default)/documents/collections')
+    .then(response => response.json())
+    .then(collections => console.log(collections.documents)
+      // console.log(collections.documents)
+      // collections.documents.forEach(item => {console.log(item)})
+    )
     // collectionRef.get().then(snapshot => {
     //   // console.log(snapshot)
     //   const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
