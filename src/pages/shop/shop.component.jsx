@@ -33,7 +33,16 @@ class ShopPage extends React.Component {
 
     fetch('https://firestore.googleapis.com/v1/projects/crwn-db-72e2a/databases/(default)/documents/collections')
     .then(response => response.json())
-    .then(collections => console.log(collections.documents)
+    .then(collections => {
+      console.log(collections.documents[0])
+     let formatedCollection = collections.documents.map(document => {
+      console.log("Collection0", document)
+        return {id:0, routeName: document.fields.title.stringValue.toLowerCase(), title: document.fields.title.stringValue, items: []}
+     })
+     console.log("FormatedCollection0", formatedCollection[0])
+
+    }
+    
       // console.log(collections.documents)
       // collections.documents.forEach(item => {console.log(item)})
     )
