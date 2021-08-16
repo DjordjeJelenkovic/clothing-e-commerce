@@ -34,18 +34,30 @@ class ShopPage extends React.Component {
     fetch('https://firestore.googleapis.com/v1/projects/crwn-db-72e2a/databases/(default)/documents/collections')
     .then(response => response.json())
     .then(collections => {
-      console.log(collections.documents[0])
-     let formatedCollection = collections.documents.map(document => {
-      console.log("Collection0", document)
-        return {id:0, routeName: document.fields.title.stringValue.toLowerCase(), title: document.fields.title.stringValue, items: []}
-     })
-     console.log("FormatedCollection0", formatedCollection[0])
+      console.log(collections.documents)
+      let formatedCollection1 = collections.documents.map(document => {
+      // console.log("Collection0", document)
+        return {id: document.name.split('/').pop(), routeName: document.fields.title.stringValue.toLowerCase(), title: document.fields.title.stringValue, items: document.fields.items.arrayValue.values.map(item => { return { id: item.mapValue.fields.id.integerValue, imageUrl: item.mapValue.fields.imageUrl.stringValue, name: item.mapValue.fields.name.stringValue, price: item.mapValue.fields.price.integerValue }})
+        }
+        
+      })
+      console.log("FormatedCollection0", formatedCollection1)
 
-    }
+
+      // formatedCollection1 = formatedCollection1.map(item => {
+      //   // console.log("Collection0", document)
+      //     return {id: item.id, routeName: item.routeName, title: item.title, items: item.items.map(item => { return { id: item.mapValue.fields.id.integerValue, imageUrl: item.mapValue.fields.imageUrl.stringValue, name: item.mapValue.fields.name.stringValue, price: item.mapValue.fields.price.integerValue }})
+      //     }
+  
+    //  })
+
+    //  console.log("FormatedCollection0", formatedCollection1)
+
+    })
     
       // console.log(collections.documents)
       // collections.documents.forEach(item => {console.log(item)})
-    )
+    
     // collectionRef.get().then(snapshot => {
     //   // console.log(snapshot)
     //   const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
