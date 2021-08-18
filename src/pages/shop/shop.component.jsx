@@ -37,12 +37,33 @@ class ShopPage extends React.Component {
       console.log(collections.documents)
       let formatedCollection1 = collections.documents.map(document => {
       // console.log("Collection0", document)
-        return {id: document.name.split('/').pop(), routeName: document.fields.title.stringValue.toLowerCase(), title: document.fields.title.stringValue, items: document.fields.items.arrayValue.values.map(item => { return { id: item.mapValue.fields.id.integerValue, imageUrl: item.mapValue.fields.imageUrl.stringValue, name: item.mapValue.fields.name.stringValue, price: item.mapValue.fields.price.integerValue }})
-        }
+     let arrayItems = document.fields.items.arrayValue.values.map(item =>  { 
+       const itemFields = item.mapValue.fields
+      return { 
+       id: itemFields.id.integerValue, 
+       imageUrl: itemFields.imageUrl.stringValue, 
+       name: itemFields.name.stringValue, 
+       price: itemFields.price.integerValue 
+     }
+   })
+        return {
+          id: document.name.split('/').pop(), 
+          routeName: document.fields.title.stringValue.toLowerCase(),
+          title: document.fields.title.stringValue, 
+          items: arrayItems
+      }
         
       })
       console.log("FormatedCollection0", formatedCollection1)
 
+      console.log("Zdravo", formatedCollection1)
+  const newVar = formatedCollection1.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {}); 
+console.log(newVar);
+      const { fetchCollectionsStartAsync } = this.props;
+    fetchCollectionsStartAsync(newVar);
 
       // formatedCollection1 = formatedCollection1.map(item => {
       //   // console.log("Collection0", document)
@@ -65,8 +86,8 @@ class ShopPage extends React.Component {
     //   updateCollections(collectionsMap);
     //   this.setState({ loading: false });
     // });
-    const { fetchCollectionsStartAsync } = this.props;
-    fetchCollectionsStartAsync();
+    // const { fetchCollectionsStartAsync } = this.props;
+    // fetchCollectionsStartAsync(formatedCollection1);
   }
 
   render() {
@@ -94,7 +115,7 @@ const mapStatetoProps = createStructuredSelector({
 const mapDispatchToProps = dispatch => ({
   // updateCollections: collectionsMap =>
   //   dispatch(updateCollections(collectionsMap))
-  fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync())
+  fetchCollectionsStartAsync: (param1) => dispatch(fetchCollectionsStartAsync(param1))
 });
 
 export default connect(
