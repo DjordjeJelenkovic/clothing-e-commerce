@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 
+
 const buttonStyles = css`
   background-color: black;
   color: white;
@@ -9,6 +10,7 @@ const buttonStyles = css`
     background-color: white;
     color: black;
     border: 1px solid black;
+
   }
 `;
 
@@ -54,6 +56,11 @@ export const CustomButtonContainer = styled.button`
   cursor: pointer;
   display: flex;
   justify-content: center;
-
+  width: 80%;
+    opacity: 0.7;
+    position: absolute;
+    top: 255px;
+    display: none;
+    
   ${getButtonStyles}
 `;
