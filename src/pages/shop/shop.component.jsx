@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 //   convertCollectionsSnapshotToMap
 // } from '../../firebase/firebase.utils';
 
-import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions';
+import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 
 import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.container';
 import CollectionPageContainer from '../collection/collection.container';
@@ -55,8 +55,8 @@ class ShopPage extends React.Component {
     return accumulator;
   }, {}); 
 console.log(newVar);
-      const { fetchCollectionsStartAsync } = this.props;
-    fetchCollectionsStartAsync(newVar);
+      const { fetchCollectionsStart } = this.props;
+    fetchCollectionsStart(newVar);
 
       // formatedCollection1 = formatedCollection1.map(item => {
       //   // console.log("Collection0", document)
@@ -106,7 +106,7 @@ console.log(newVar);
 const mapDispatchToProps = dispatch => ({
   // updateCollections: collectionsMap =>
   //   dispatch(updateCollections(collectionsMap))
-  fetchCollectionsStartAsync: (param1) => dispatch(fetchCollectionsStartAsync(param1))
+  fetchCollectionsStart: (param1) => dispatch(fetchCollectionsStart(param1))
 });
 
 export default connect(
