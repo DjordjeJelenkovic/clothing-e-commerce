@@ -33,26 +33,26 @@ class App extends React.Component {
     // console.error('this.props: ', this.props)
     const { mappedSetCurrentUser} = this.props;
 
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+    // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    //   if (userAuth) {
+    //     const userRef = await createUserProfileDocument(userAuth);
 
-        userRef.onSnapshot(snapShot => {
-          // console.log('data whole: ', snapShot)
-          // console.error('data whole: ', snapShot)
-          // console.warn('data: ', snapShot.data())
-          // console.info('data: ', snapShot.data())
-          mappedSetCurrentUser({
-              id: snapShot.id,
-              ...snapShot.data()
-          });
-          // console.log(this.state);
-        });
-      }
+    //     userRef.onSnapshot(snapShot => {
+    //       // console.log('data whole: ', snapShot)
+    //       // console.error('data whole: ', snapShot)
+    //       // console.warn('data: ', snapShot.data())
+    //       // console.info('data: ', snapShot.data())
+    //       mappedSetCurrentUser({
+    //           id: snapShot.id,
+    //           ...snapShot.data()
+    //       });
+    //       // console.log(this.state);
+    //     });
+    //   }
 
-      mappedSetCurrentUser(userAuth);
-      // addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({ title, items })));
-    });
+    //   mappedSetCurrentUser(userAuth);
+    //   // addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({ title, items })));
+    // });
   }
 
   componentWillUnmount() {
