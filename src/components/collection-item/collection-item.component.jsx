@@ -22,7 +22,7 @@ const CollectionItem = ({ item, mappedAddItem }) => {
         <span className='name'>{name}</span>
         <span className='price'>{price}</span>
       </div>
-      <CustomButton onClick={() => mappedAddItem(item)} inverted>
+      <CustomButton className="custom-button" onClick={() => mappedAddItem(item)} inverted>
         Add to cart
       </CustomButton>
     </div>
