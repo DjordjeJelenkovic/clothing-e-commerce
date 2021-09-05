@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -12,17 +12,8 @@ import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.container';
 import CollectionPageContainer from '../collection/collection.container';
 
-class ShopPage extends React.Component {
-  // state = {
-  //   loading: true
-  // };
-
-  // unsubscribeFromSnapshot = null;
-
-  componentDidMount() {
-    // console.log("Zdravo")
-    // const { updateCollections } = this.props;
-    // const collectionRef = firestore.collection('collections');
+const ShopPage = ({ fetchCollectionsStart, match }) => {
+  useEffect(() => {
 
     fetch('https://firestore.googleapis.com/v1/projects/crwn-db-72e2a/databases/(default)/documents/collections')
     .then(response => response.json())
@@ -55,7 +46,7 @@ class ShopPage extends React.Component {
     return accumulator;
   }, {}); 
 console.log(newVar);
-      const { fetchCollectionsStart } = this.props;
+
     fetchCollectionsStart(newVar);
 
       // formatedCollection1 = formatedCollection1.map(item => {
@@ -81,11 +72,7 @@ console.log(newVar);
     // });
     // const { fetchCollectionsStartAsync } = this.props;
     // fetchCollectionsStartAsync(formatedCollection1);
-  }
-
-  render() {
-    const { match } = this.props;
-    // const { loading } = this.state;
+  }, [fetchCollectionsStart]);
 
     return (
       <div className='shop-page'>
@@ -101,7 +88,6 @@ console.log(newVar);
       </div>
     )
   }
-};
 
 const mapDispatchToProps = dispatch => ({
   // updateCollections: collectionsMap =>
