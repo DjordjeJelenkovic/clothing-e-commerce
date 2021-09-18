@@ -7,12 +7,12 @@
 },  
 
   "scripts": {
-    "client": "npm start",
-    "server": "cd back-end && nodemon server.js",
+    "client": "cd - && npm start",
+    "server": "nodemon server.js",
     "build": "npm run build",
-    "dev": "cd back-end && concurrently --kill-others-on-fail \"npm server\" \"npm client\"",
-    "start": "cd back-end && node server.js",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "start": "node server.js",
+    "heroku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
